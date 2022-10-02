@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_titles_inputs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="140dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <TextView
+        android:id="@+id/date_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date_title"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/date_edit"
+        app:layout_constraintEnd_toStartOf="@id/guideline_titles_inputs"
+        app:layout_constraintStart_toStartOf="@id/guideline_start" />
+
+    <TextView
+        android:id="@+id/date_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/add_edit"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_titles_inputs"
+        app:layout_constraintTop_toBottomOf="@id/sum_value"
+        tools:text="01.01.2022" />
+
+    <TextView
+        android:id="@+id/add_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date_income"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/add_edit"
+        app:layout_constraintEnd_toStartOf="@id/guideline_titles_inputs"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toTopOf="@id/add_edit" />
+
+    <EditText
+        android:id="@+id/add_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/null_number_value"
+        android:inputType="numberDecimal"
+        android:gravity="end"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/out_edit"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_titles_inputs"
+        app:layout_constraintTop_toBottomOf="@id/date_edit" />
+
+    <TextView
+        android:id="@+id/out_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/consumption_title"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/out_edit"
+        app:layout_constraintEnd_toStartOf="@id/guideline_titles_inputs"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/add_edit"
+        app:layout_constraintTop_toTopOf="@id/out_edit" />
+
+    <EditText
+        android:id="@+id/out_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/null_number_value"
+        android:inputType="numberDecimal"
+        android:gravity="end"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/add_extra_edit"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_titles_inputs"
+        app:layout_constraintTop_toBottomOf="@id/add_edit" />
+
+    <TextView
+        android:id="@+id/add_extra_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/extra_income_title"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/add_extra_edit"
+        app:layout_constraintEnd_toStartOf="@id/guideline_titles_inputs"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/out_title"
+        app:layout_constraintTop_toTopOf="@id/add_extra_edit" />
+
+    <EditText
+        android:id="@+id/add_extra_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/null_number_value"
+        android:inputType="numberDecimal"
+        android:gravity="end"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/invest_edit"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_titles_inputs"
+        app:layout_constraintTop_toBottomOf="@id/out_edit" />
+
+    <TextView
+        android:id="@+id/invest_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/investments_title"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@id/invest_edit"
+        app:layout_constraintEnd_toStartOf="@id/guideline_titles_inputs"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/add_extra_title"
+        app:layout_constraintTop_toTopOf="@id/invest_edit" />
+
+    <EditText
+        android:id="@+id/invest_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/null_number_value"
+        android:inputType="numberDecimal"
+        android:gravity="end"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/done_button"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_titles_inputs"
+        app:layout_constraintTop_toBottomOf="@id/add_extra_edit" />
+
+    <TextView
+        android:id="@+id/sum_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/sum_title"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/sum_value"
+        app:layout_constraintEnd_toStartOf="@id/guideline_titles_inputs"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/invest_title"
+        app:layout_constraintTop_toTopOf="@id/sum_value" />
+
+    <TextView
+        android:id="@+id/sum_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/null_number_value"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/date_edit"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintStart_toEndOf="@id/guideline_titles_inputs"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/done_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hammer_in_button_title"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/invest_edit" />
+</androidx.constraintlayout.widget.ConstraintLayout>
