@@ -115,15 +115,15 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
         with(wedge) {
             viewModel.getSumWedgesOnDate(date).observeOnce(requireActivity()) { sumWedgesOnDate ->
                 val text =
-                    "ОТЧЁТ за ${util.getFormattedDate(date)}:\n" +
-                            "Сумма от правила клина: ${util.num2String(sum - addExtra)}\n" +
-                            "Заработано дополнительно: ${util.num2String(addExtra)}\n" +
+                    getString(R.string.share_intent_date) + " ${util.getFormattedDate(date)}:\n" +
+                            getString(R.string.share_intent_wedge) + ": ${util.num2String(sum - addExtra)}\n" +
+                            getString(R.string.share_intent_add_extra) + ": ${util.num2String(addExtra)}\n" +
                             if (invest > 0) {
-                                "Инвестировано ${util.num2String(invest)}\n"
+                                getString(R.string.share_intent_invest) + ": ${util.num2String(invest)}\n"
                             } else {
                                 ""
                             } +
-                            "Итого на инвестиции: $sumWedgesOnDate"
+                            getString(R.string.share_intent_sum) + ": ${util.num2String(sumWedgesOnDate)}"
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     type = "text/plain"

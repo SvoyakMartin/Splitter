@@ -22,4 +22,10 @@
     <string name="fragment_statistic_all_wedges_sum_title">Забито за всё время:</string>
     <string name="fragment_statistic_invests_sum_title">Из них инвестировано:</string>
     <string name="fragment_statistic_current_wedges_sum_title">Текущие накопления:</string>
+<!--    Telegram intent text  -->
+    <string name="share_intent_date">ОТЧЁТ за</string>
+    <string name="share_intent_wedge">Сумма от правила клина</string>
+    <string name="share_intent_add_extra">Заработано дополнительно</string>
+    <string name="share_intent_invest">Инвестировано</string>
+    <string name="share_intent_sum">Итого на инвестиции</string>
 </resources>
