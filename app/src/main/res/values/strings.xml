@@ -14,7 +14,7 @@
     <string name="extra_income_title">Доп. доход</string>
     <string name="investments_title">Инвестиции</string>
     <string name="hammer_in_button_title">Забить</string>
-    <string name="null_number_value">0.00</string>
+    <string name="null_number_value" translatable="false">0.00</string>
 <!--    Context menu    -->
     <string name="item_context_menu_delete">Удалить</string>
     <string name="item_context_menu_send">Отправить</string>
@@ -28,4 +28,9 @@
     <string name="share_intent_add_extra">Заработано дополнительно</string>
     <string name="share_intent_invest">Инвестировано</string>
     <string name="share_intent_sum">Итого на инвестиции</string>
+<!--    Confirm delete dialog  -->
+    <string name="confirm_delete_dialog_yes">Да</string>
+    <string name="confirm_delete_dialog_no">Нет</string>
+    <string name="confirm_delete_dialog_title">Подтвердите удаление</string>
+    <string name="confirm_delete_dialog_message">Уверены, что хотите удалить запись за</string>
 </resources>
