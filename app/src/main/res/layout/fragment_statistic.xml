@@ -91,4 +91,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/current_wedges_sum_title" />
+
+    <TextView
+        android:id="@+id/amount_of_days_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/fragment_statistic_amount_of_days_title"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/current_wedges_sum_value" />
+
+    <TextView
+        android:id="@+id/amount_of_days_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/null_integer_value"
+        android:textColor="#00F"
+        android:textSize="70sp"
+        app:autoSizeMaxTextSize="70sp"
+        app:autoSizeMinTextSize="22sp"
+        app:autoSizeStepGranularity="2sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amount_of_days_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

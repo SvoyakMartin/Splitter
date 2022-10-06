@@ -28,6 +28,9 @@ interface WedgeDao {
     @Query("SELECT SUM(wedge) FROM totals_table")
     fun getSumWedges(): Flow<Double>
 
+    @Query("SELECT COUNT(DISTINCT date) FROM totals_table")
+    fun getTotalDays(): Flow<Int>
+
     @Query("SELECT SUM(wedge) - SUM(invest) AS sum FROM totals_table WHERE date <= :date")
     fun getSumWedgesOnDate(date: Long): Flow<Double>
 

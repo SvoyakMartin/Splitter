@@ -9,6 +9,7 @@ class WedgeRepository(private val wedgeDao: WedgeDao) {
     val allWedge: Flow<List<Wedge>> = wedgeDao.getAllWedges()
     val sumInvests: Flow<Double> = wedgeDao.getSumInvests()
     val sumWedges: Flow<Double> = wedgeDao.getSumWedges()
+    val totalDays: Flow<Int> = wedgeDao.getTotalDays()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread

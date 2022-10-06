@@ -35,21 +35,23 @@ class StatisticFragment : Fragment() {
         viewModel.apply {
             with(binding) {
                 sumWedges.observe(requireActivity()) {
-                    allWedgesSumValue.text = util.num2String(it?:0.0)
+                    allWedgesSumValue.text = util.num2String(it ?: 0.0)
                     setCurrentWedgeSum()
                 }
                 sumInvests.observe(requireActivity()) {
-                    investsSumValue.text = util.num2String(it?:0.0)
+                    investsSumValue.text = util.num2String(it ?: 0.0)
                     setCurrentWedgeSum()
                 }
+                totalDays.observe(requireActivity()) {
+                    amountOfDaysValue.text = (it ?: 0).toString()
+                }
             }
-            // TODO: вывести количество дней
         }
     }
 
     private fun setCurrentWedgeSum() {
-        binding.currentWedgesSumValue.text = with(viewModel){
-            util.num2String(((sumWedges.value?:0.0).minus(sumInvests.value?:0.0)))
+        binding.currentWedgesSumValue.text = with(viewModel) {
+            util.num2String(((sumWedges.value ?: 0.0).minus(sumInvests.value ?: 0.0)))
         }
     }
 

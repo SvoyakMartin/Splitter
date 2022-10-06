@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Splitter</string>
+<!--    Placeholders   -->
+    <string name="null_number_value" translatable="false">0.00</string>
+    <string name="null_integer_value" translatable="false">0</string>
 <!--    Main activity   -->
     <string name="floating_action_button_add_text">Добавить запись за день</string>
     <string name="wedge_list_place_holder_text">Жми на кнопку, чтобы забить свой первый клин!</string>
@@ -14,7 +17,6 @@
     <string name="extra_income_title">Доп. доход</string>
     <string name="investments_title">Инвестиции</string>
     <string name="hammer_in_button_title">Забить</string>
-    <string name="null_number_value" translatable="false">0.00</string>
 <!--    Context menu    -->
     <string name="item_context_menu_delete">Удалить</string>
     <string name="item_context_menu_send">Отправить</string>
@@ -22,6 +24,7 @@
     <string name="fragment_statistic_all_wedges_sum_title">Забито за всё время:</string>
     <string name="fragment_statistic_invests_sum_title">Из них инвестировано:</string>
     <string name="fragment_statistic_current_wedges_sum_title">Текущие накопления:</string>
+    <string name="fragment_statistic_amount_of_days_title">Всего дней:</string>
 <!--    Telegram intent text  -->
     <string name="share_intent_date">ОТЧЁТ за</string>
     <string name="share_intent_wedge">Сумма от правила клина</string>

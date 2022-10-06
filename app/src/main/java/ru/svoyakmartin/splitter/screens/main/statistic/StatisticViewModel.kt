@@ -6,6 +6,7 @@ import ru.svoyakmartin.splitter.data.WedgeRepository
 class StatisticViewModel (repository: WedgeRepository) : ViewModel() {
     val sumInvests: LiveData<Double> = repository.sumInvests.asLiveData()
     val sumWedges: LiveData<Double> = repository.sumWedges.asLiveData()
+    val totalDays: LiveData<Int> = repository.totalDays.asLiveData()
 }
 
 class StatisticViewModelFactory(private val repository: WedgeRepository) : ViewModelProvider.Factory {
