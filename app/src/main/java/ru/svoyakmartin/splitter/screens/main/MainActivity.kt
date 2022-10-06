@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this@MainActivity,
-                        "Нажмите для выхода ещё раз",
+                        getString(R.string.back_pressed_toast_text),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

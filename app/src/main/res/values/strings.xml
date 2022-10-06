@@ -6,6 +6,7 @@
 <!--    Main activity   -->
     <string name="floating_action_button_add_text">Добавить запись за день</string>
     <string name="wedge_list_place_holder_text">Жми на кнопку, чтобы забить свой первый клин!</string>
+    <string name="back_pressed_toast_text">"Нажмите для выхода ещё раз"</string>
 <!--    Bottom menu -->
     <string name="bottom_menu_item_wedge_list">Список</string>
     <string name="bottom_menu_item_wedge_statistic">Статистика</string>
