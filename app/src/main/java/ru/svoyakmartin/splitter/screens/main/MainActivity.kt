@@ -17,6 +17,9 @@ import kotlin.system.exitProcess
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var backPressed: Long = 0
+    private val listFragment = WedgeListFragment.getInstance()
+    private val statisticFragment = StatisticFragment.getInstance()
+    private var currentFragmentTag: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        val listFragment = WedgeListFragment.getInstance()
         setContent(listFragment)
 
         binding.apply {
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.bottom_menu_item_wedge_statistic -> {
                         floatingActionButtonAdd.visibility = View.GONE
-                        setContent(StatisticFragment.getInstance())
+                        setContent(statisticFragment)
                     }
                 }
                 true
@@ -69,9 +71,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setContent(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.place_holder, fragment)
-            .commit()
+        val destFragmentTag = fragment::class.java.name
+
+        if (currentFragmentTag == destFragmentTag) return
+
+        val transaction = supportFragmentManager.beginTransaction()
+        val currentFragment = supportFragmentManager.findFragmentByTag(currentFragmentTag)
+        var destFragment = supportFragmentManager.findFragmentByTag(destFragmentTag)
+
+        if (destFragment == null){
+            transaction.add(R.id.place_holder, fragment, destFragmentTag)
+            destFragment = fragment
+        }
+
+        transaction.apply {
+                if (currentFragment != null){
+                    hide(currentFragment)
+                }
+                show(destFragment)
+                commit()
+            }
+
+        currentFragmentTag = destFragmentTag
     }
 }

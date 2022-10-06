@@ -1,6 +1,5 @@
 package ru.svoyakmartin.splitter.screens.main.list
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
@@ -43,7 +42,6 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
         init()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun init() {
         binding.apply {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -88,7 +86,7 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
             setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.item_context_menu_delete -> {
-                        deleteWedge(wedge)
+                        confirmDeleteWedge(wedge)
                     }
                     R.id.item_context_menu_send -> {
                         makeShareIntent(wedge)
@@ -103,21 +101,23 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
         }
     }
 
-    private fun deleteWedge(wedge: Wedge) {
-        with(wedge) {
-            viewModel.apply {
-                AlertDialog.Builder(requireContext()).apply {
-                    setPositiveButton(getString(R.string.confirm_delete_dialog_yes)) { _, _ ->
-                        deleteWedge(wedge)
-                        deleteTotal(Total(date, sum, invest))
-                    }
-                    setNegativeButton(getString(R.string.confirm_delete_dialog_no)) { _, _ -> }
-                    setTitle(getString(R.string.confirm_delete_dialog_title))
-                    setMessage("${getString(R.string.confirm_delete_dialog_message)} ${util.getFormattedDate(date)}?")
-                    create()
-                    show()
-                }
+    private fun confirmDeleteWedge(wedge: Wedge) {
+        AlertDialog.Builder(requireContext()).apply {
+            setPositiveButton(getString(R.string.confirm_delete_dialog_yes)) { _, _ ->
+                deleteWedgeOnDB(wedge)
             }
+            setNegativeButton(getString(R.string.confirm_delete_dialog_no)) { _, _ -> }
+            setTitle(getString(R.string.confirm_delete_dialog_title))
+            setMessage("${getString(R.string.confirm_delete_dialog_message)} ${util.getFormattedDate(wedge.date)}?")
+            create()
+            show()
+        }
+    }
+
+    private fun deleteWedgeOnDB(wedge: Wedge) {
+        viewModel.apply {
+                deleteWedge(wedge)
+                deleteTotal(Total(wedge.date))
         }
     }
 
@@ -127,25 +127,9 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
                 val text =
                     getString(R.string.share_intent_date) + " ${util.getFormattedDate(date)}:\n" +
                             getString(R.string.share_intent_wedge) + ": ${util.num2String(sum - addExtra)}\n" +
-                            getString(R.string.share_intent_add_extra) + ": ${
-                        util.num2String(
-                            addExtra
-                        )
-                    }\n" +
-                            if (invest > 0) {
-                                getString(R.string.share_intent_invest) + ": ${
-                                    util.num2String(
-                                        invest
-                                    )
-                                }\n"
-                            } else {
-                                ""
-                            } +
-                            getString(R.string.share_intent_sum) + ": ${
-                        util.num2String(
-                            sumWedgesOnDate
-                        )
-                    }"
+                            getString(R.string.share_intent_add_extra) + ": ${util.num2String(addExtra)}\n" +
+                            if (invest > 0) {getString(R.string.share_intent_invest) + ": ${util.num2String(invest)}\n"} else {""} +
+                            getString(R.string.share_intent_sum) + ": ${util.num2String(sumWedgesOnDate)}"
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     type = "text/plain"

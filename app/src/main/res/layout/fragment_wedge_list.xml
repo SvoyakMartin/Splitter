@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:visibility="gone"
         android:text="@string/wedge_list_place_holder_text"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
