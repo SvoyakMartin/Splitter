@@ -27,11 +27,11 @@
     <string name="fragment_statistic_current_wedges_sum_title">Текущие накопления:</string>
     <string name="fragment_statistic_amount_of_days_title">Всего дней:</string>
 <!--    Telegram intent text  -->
-    <string name="share_intent_date">ОТЧЁТ за</string>
-    <string name="share_intent_wedge">Сумма от правила клина</string>
-    <string name="share_intent_add_extra">Заработано дополнительно</string>
-    <string name="share_intent_invest">Инвестировано</string>
-    <string name="share_intent_sum">Итого на инвестиции</string>
+    <string name="share_intent_date">ОТЧЁТ за %1$s:\n</string>
+    <string name="share_intent_wedge">Сумма от правила клина: %1$s\n</string>
+    <string name="share_intent_add_extra">Заработано дополнительно: %1$s\n</string>
+    <string name="share_intent_invest">Инвестировано: %1$s\n</string>
+    <string name="share_intent_sum">Итого на инвестиции: %1$s</string>
 <!--    Confirm delete dialog  -->
     <string name="confirm_delete_dialog_yes">Да</string>
     <string name="confirm_delete_dialog_no">Нет</string>

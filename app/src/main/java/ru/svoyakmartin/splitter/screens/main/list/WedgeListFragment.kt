@@ -19,7 +19,7 @@ import ru.svoyakmartin.splitter.databinding.FragmentWedgeListBinding
 import ru.svoyakmartin.splitter.model.Total
 import ru.svoyakmartin.splitter.model.Wedge
 import ru.svoyakmartin.splitter.screens.add.WedgeEditActivity
-import ru.svoyakmartin.splitter.util.util
+import ru.svoyakmartin.splitter.util.Util
 
 class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
     private lateinit var binding: FragmentWedgeListBinding
@@ -108,7 +108,7 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
             }
             setNegativeButton(getString(R.string.confirm_delete_dialog_no)) { _, _ -> }
             setTitle(getString(R.string.confirm_delete_dialog_title))
-            setMessage("${getString(R.string.confirm_delete_dialog_message)} ${util.getFormattedDate(wedge.date)}?")
+            setMessage("${getString(R.string.confirm_delete_dialog_message)} ${Util.getFormattedDate(wedge.date)}?")
             create()
             show()
         }
@@ -125,11 +125,11 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
         with(wedge) {
             viewModel.getSumWedgesOnDate(date).observeOnce(requireActivity()) { sumWedgesOnDate ->
                 val text =
-                    getString(R.string.share_intent_date) + " ${util.getFormattedDate(date)}:\n" +
-                            getString(R.string.share_intent_wedge) + ": ${util.num2String(sum - addExtra)}\n" +
-                            getString(R.string.share_intent_add_extra) + ": ${util.num2String(addExtra)}\n" +
-                            if (invest > 0) {getString(R.string.share_intent_invest) + ": ${util.num2String(invest)}\n"} else {""} +
-                            getString(R.string.share_intent_sum) + ": ${util.num2String(sumWedgesOnDate)}"
+                    getString(R.string.share_intent_date, Util.getFormattedDate(date)) +
+                            getString(R.string.share_intent_wedge, Util.num2String(sum - addExtra)) +
+                            getString(R.string.share_intent_add_extra, Util.num2String(addExtra)) +
+                            if (invest > 0) {getString(R.string.share_intent_invest, Util.num2String(invest))} else {""} +
+                            getString(R.string.share_intent_sum, Util.num2String(sumWedgesOnDate))
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     type = "text/plain"
