@@ -14,10 +14,11 @@ import ru.svoyakmartin.splitter.WedgesApplication
 import ru.svoyakmartin.splitter.model.Wedge
 import ru.svoyakmartin.splitter.databinding.ActivityWedgeEditBinding
 import ru.svoyakmartin.splitter.model.Total
-import ru.svoyakmartin.splitter.util.util
+import ru.svoyakmartin.splitter.util.Util
 
 class WedgeEditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWedgeEditBinding
+    private var currentSum = 0.0
 
     @RequiresApi(Build.VERSION_CODES.N)
     private var calendar = getCalendarInstance()
@@ -54,7 +55,7 @@ class WedgeEditActivity : AppCompatActivity() {
                     out = getNumber(outEdit)
                     addExtra = getNumber(addExtraEdit)
                     invest = getNumber(investEdit)
-                    sum = getNumber(sumValue)
+                    sum = currentSum
                 }
 
                 viewModel.apply {
@@ -109,15 +110,7 @@ class WedgeEditActivity : AppCompatActivity() {
     }
 
     private fun getNumber(view: TextView): Double {
-        val text = view.text
-
-        return if (text.isEmpty()
-            || text.toString() == "."
-        ) {
-            0.0
-        } else {
-            text.toString().toDouble()
-        }
+        return view.text.toString().toDoubleOrNull() ?: 0.0
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -156,7 +149,7 @@ class WedgeEditActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun displayFormattedDate() {
-        binding.dateEdit.text = util.getFormattedDate(calendar.timeInMillis)
+        binding.dateEdit.text = Util.getFormattedDate(calendar.timeInMillis)
     }
 
     private fun getEditable(number: Double): Editable {
@@ -165,8 +158,8 @@ class WedgeEditActivity : AppCompatActivity() {
 
     private fun refreshSum() {
         with(binding){
-            val sum = (getNumber(addEdit) + getNumber(outEdit)) / 10 + getNumber(addExtraEdit)
-            sumValue.text = util.num2String(sum)
+            currentSum = (getNumber(addEdit) + getNumber(outEdit)) / 10 + getNumber(addExtraEdit)
+            sumValue.text = Util.num2String(currentSum)
         }
     }
 }
