@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.widget.doAfterTextChanged
+import ru.svoyakmartin.splitter.R
 import ru.svoyakmartin.splitter.WedgesApplication
 import ru.svoyakmartin.splitter.model.Wedge
 import ru.svoyakmartin.splitter.databinding.ActivityWedgeEditBinding
@@ -51,10 +52,10 @@ class WedgeEditActivity : AppCompatActivity() {
             doneButton.setOnClickListener {
                 wedge.apply {
                     date = calendar.timeInMillis
-                    add = getNumber(addEdit)
-                    out = getNumber(outEdit)
-                    addExtra = getNumber(addExtraEdit)
-                    invest = getNumber(investEdit)
+                    add = getNumber(addEditText)
+                    out = getNumber(outEditText)
+                    addExtra = getNumber(addExtraEditText)
+                    invest = getNumber(investEditText)
                     sum = currentSum
                 }
 
@@ -74,30 +75,29 @@ class WedgeEditActivity : AppCompatActivity() {
             if (hasWedge) {
                 with(wedge){
                     calendar.timeInMillis = date
-                    addEdit.text = getEditable(add)
-                    outEdit.text = getEditable(out)
-                    addExtraEdit.text = getEditable(addExtra)
-                    investEdit.text = getEditable(invest)
+                    addEditText.text = getEditable(add)
+                    outEditText.text = getEditable(out)
+                    addExtraEditText.text = getEditable(addExtra)
+                    investEditText.text = getEditable(invest)
                 }
-                refreshSum()
             }
-
+            refreshSum()
             displayFormattedDate()
 
 //            val filter = arrayOf<InputFilter>(DecimalDigitsInputFilter(5, 2))
 
 //            addEdit.filters = filter
-            addEdit.doAfterTextChanged {
+            addEditText.doAfterTextChanged {
                 refreshSum()
             }
 
 //            outEdit.filters = filter
-            outEdit.doAfterTextChanged {
+            outEditText.doAfterTextChanged {
                 refreshSum()
             }
 
 //            addExtraEdit.filters = filter
-            addExtraEdit.doAfterTextChanged {
+            addExtraEditText.doAfterTextChanged {
                 refreshSum()
             }
 
@@ -158,8 +158,8 @@ class WedgeEditActivity : AppCompatActivity() {
 
     private fun refreshSum() {
         with(binding){
-            currentSum = (getNumber(addEdit) + getNumber(outEdit)) / 10 + getNumber(addExtraEdit)
-            sumValue.text = Util.num2String(currentSum)
+            currentSum = (getNumber(addEditText) + getNumber(outEditText)) / 10 + getNumber(addExtraEditText)
+            sumTitle.text = getString(R.string.sum_title, Util.num2String(currentSum))
         }
     }
 }

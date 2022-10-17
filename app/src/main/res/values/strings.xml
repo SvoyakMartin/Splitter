@@ -11,13 +11,13 @@
     <string name="bottom_menu_item_wedge_list">Список</string>
     <string name="bottom_menu_item_wedge_statistic">Статистика</string>
 <!--    Add activity    -->
-    <string name="sum_title">Клин:</string>
+    <string name="sum_title">Клин: %1$s</string>
     <string name="date_title">Дата</string>
-    <string name="date_income">Доход</string>
-    <string name="consumption_title">Расход</string>
-    <string name="extra_income_title">Доп. доход</string>
-    <string name="investments_title">Инвестиции</string>
-    <string name="hammer_in_button_title">Забить</string>
+    <string name="add_title">Доход</string>
+    <string name="out_title">Расход</string>
+    <string name="add_extra_title">Дополнительный доход</string>
+    <string name="invest_title">Инвестиции</string>
+    <string name="done_button_title">Забить</string>
 <!--    Context menu    -->
     <string name="item_context_menu_delete">Удалить</string>
     <string name="item_context_menu_send">Отправить</string>

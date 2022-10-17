@@ -45,107 +45,96 @@
         app:layout_constraintBottom_toTopOf="@id/add_edit"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_titles_inputs"
-        app:layout_constraintTop_toBottomOf="@id/sum_value"
+        app:layout_constraintTop_toBottomOf="@id/sum_title"
         tools:text="01.01.2022" />
 
-    <TextView
-        android:id="@+id/add_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/date_income"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/add_edit"
-        app:layout_constraintEnd_toStartOf="@id/guideline_titles_inputs"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toTopOf="@id/add_edit" />
-
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/add_edit"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/null_number_value"
-        android:inputType="numberDecimal"
-        android:gravity="end"
-        android:textSize="22sp"
+        android:hint="@string/add_title"
         app:layout_constraintBottom_toTopOf="@id/out_edit"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintStart_toStartOf="@id/guideline_titles_inputs"
-        app:layout_constraintTop_toBottomOf="@id/date_edit" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/date_edit"
+        app:startIconContentDescription=""
+        app:startIconDrawable="@drawable/ic_edit_add_24">
 
-    <TextView
-        android:id="@+id/out_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/consumption_title"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/out_edit"
-        app:layout_constraintEnd_toStartOf="@id/guideline_titles_inputs"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/add_edit"
-        app:layout_constraintTop_toTopOf="@id/out_edit" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textSize="22sp" />
 
-    <EditText
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/out_edit"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/null_number_value"
-        android:inputType="numberDecimal"
-        android:gravity="end"
-        android:textSize="22sp"
+        android:hint="@string/out_title"
         app:layout_constraintBottom_toTopOf="@id/add_extra_edit"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintStart_toStartOf="@id/guideline_titles_inputs"
-        app:layout_constraintTop_toBottomOf="@id/add_edit" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/add_edit"
+        app:startIconContentDescription=""
+        app:startIconDrawable="@drawable/ic_edit_out_24">
 
-    <TextView
-        android:id="@+id/add_extra_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/extra_income_title"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/add_extra_edit"
-        app:layout_constraintEnd_toStartOf="@id/guideline_titles_inputs"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/out_title"
-        app:layout_constraintTop_toTopOf="@id/add_extra_edit" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/out_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textSize="22sp" />
 
-    <EditText
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/add_extra_edit"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/null_number_value"
-        android:inputType="numberDecimal"
-        android:gravity="end"
-        android:textSize="22sp"
+        android:hint="@string/add_extra_title"
         app:layout_constraintBottom_toTopOf="@id/invest_edit"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintStart_toStartOf="@id/guideline_titles_inputs"
-        app:layout_constraintTop_toBottomOf="@id/out_edit" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/out_edit"
+        app:startIconContentDescription=""
+        app:startIconDrawable="@drawable/ic_edit_add_extra_24">
 
-    <TextView
-        android:id="@+id/invest_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/investments_title"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@id/invest_edit"
-        app:layout_constraintEnd_toStartOf="@id/guideline_titles_inputs"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/add_extra_title"
-        app:layout_constraintTop_toTopOf="@id/invest_edit" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/add_extra_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textSize="22sp" />
 
-    <EditText
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/invest_edit"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/null_number_value"
-        android:inputType="numberDecimal"
-        android:gravity="end"
-        android:textSize="22sp"
+        android:hint="@string/invest_title"
         app:layout_constraintBottom_toTopOf="@id/done_button"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintStart_toStartOf="@id/guideline_titles_inputs"
-        app:layout_constraintTop_toBottomOf="@id/add_extra_edit" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/add_extra_edit"
+        app:startIconContentDescription=""
+        app:startIconDrawable="@drawable/ic_edit_invest_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/invest_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textSize="22sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/sum_title"
@@ -155,29 +144,16 @@
         android:text="@string/sum_title"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/sum_value"
-        app:layout_constraintEnd_toStartOf="@id/guideline_titles_inputs"
-        app:layout_constraintStart_toStartOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/invest_title"
-        app:layout_constraintTop_toTopOf="@id/sum_value" />
-
-    <TextView
-        android:id="@+id/sum_value"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/null_number_value"
-        android:textSize="22sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/date_edit"
-        app:layout_constraintEnd_toStartOf="@id/guideline_end"
-        app:layout_constraintStart_toEndOf="@id/guideline_titles_inputs"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/done_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hammer_in_button_title"
+        android:text="@string/done_button_title"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
