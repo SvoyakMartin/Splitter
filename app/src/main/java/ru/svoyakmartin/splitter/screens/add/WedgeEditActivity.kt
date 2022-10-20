@@ -38,15 +38,11 @@ class WedgeEditActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun init() {
-        val hasWedge = intent.hasExtra("wedge")
-
-        wedge = if (hasWedge) {
-            if (Build.VERSION.SDK_INT >= 33) {
+        wedge = if (Build.VERSION.SDK_INT >= 33) {
                 intent.getSerializableExtra("wedge", Wedge::class.java)
             } else {
                 intent.getSerializableExtra("wedge")
             } as Wedge
-        } else Wedge()
 
         binding.apply {
             doneButton.setOnClickListener {
@@ -72,7 +68,7 @@ class WedgeEditActivity : AppCompatActivity() {
                 changeDate()
             }
 
-            if (hasWedge) {
+            if (wedge.date > 0) {
                 with(wedge){
                     calendar.timeInMillis = date
                     addEditText.text = getEditable(add)
@@ -106,6 +102,7 @@ class WedgeEditActivity : AppCompatActivity() {
             // TODO: ► 2 знака после запятой на вью всегда
             // TODO: ► выделение текста при изменении
             // TODO: ► два знака после запятой при ввооде
+            // TODO: ► иконка инфо в конце поля ввода с объяснением поля
         }
     }
 

@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import ru.svoyakmartin.splitter.WedgesApplication
 import ru.svoyakmartin.splitter.databinding.FragmentStatisticBinding
-import ru.svoyakmartin.splitter.util.util
+import ru.svoyakmartin.splitter.util.Util
 
 class StatisticFragment : Fragment() {
-
-    private lateinit var binding: FragmentStatisticBinding
+    private var _binding: FragmentStatisticBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: StatisticViewModel by viewModels {
         StatisticViewModelFactory((requireActivity().application as WedgesApplication).repository)
     }
@@ -21,9 +21,14 @@ class StatisticFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentStatisticBinding.inflate(inflater)
+        _binding = FragmentStatisticBinding.inflate(inflater)
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,11 +40,11 @@ class StatisticFragment : Fragment() {
         viewModel.apply {
             with(binding) {
                 sumWedges.observe(requireActivity()) {
-                    allWedgesSumValue.text = util.num2String(it ?: 0.0)
+                    allWedgesSumValue.text = Util.num2String(it ?: 0.0)
                     setCurrentWedgeSum()
                 }
                 sumInvests.observe(requireActivity()) {
-                    investsSumValue.text = util.num2String(it ?: 0.0)
+                    investsSumValue.text = Util.num2String(it ?: 0.0)
                     setCurrentWedgeSum()
                 }
                 totalDays.observe(requireActivity()) {
@@ -51,12 +56,9 @@ class StatisticFragment : Fragment() {
 
     private fun setCurrentWedgeSum() {
         binding.currentWedgesSumValue.text = with(viewModel) {
-            util.num2String(((sumWedges.value ?: 0.0).minus(sumInvests.value ?: 0.0)))
+            Util.num2String(((sumWedges.value ?: 0.0).minus(sumInvests.value ?: 0.0)))
         }
     }
-
-    companion object {
-        @JvmStatic
-        fun getInstance() = StatisticFragment()
-    }
 }
+
+// TODO: добавить количество дней без перерыва и максимальное без перерыва

@@ -6,14 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".screens.main.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/place_holder"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_action_button_add"
@@ -23,8 +26,8 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/floating_action_button_add_text"
         android:src="@drawable/ic_floating_action_button_add_24"
-        app:layout_constraintBottom_toBottomOf="@+id/place_holder"
-        app:layout_constraintEnd_toEndOf="@+id/place_holder" />
+        app:layout_constraintBottom_toBottomOf="@+id/nav_host_fragment"
+        app:layout_constraintEnd_toEndOf="@+id/nav_host_fragment" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

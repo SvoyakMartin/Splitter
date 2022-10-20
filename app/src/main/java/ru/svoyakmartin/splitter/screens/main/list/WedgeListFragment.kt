@@ -13,6 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.svoyakmartin.splitter.*
 import ru.svoyakmartin.splitter.databinding.FragmentWedgeListBinding
@@ -22,7 +24,8 @@ import ru.svoyakmartin.splitter.screens.add.WedgeEditActivity
 import ru.svoyakmartin.splitter.util.Util
 
 class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
-    private lateinit var binding: FragmentWedgeListBinding
+    private var _binding: FragmentWedgeListBinding? = null
+    private val binding get() = _binding!!
     private val adapter = WedgeAdapter(this)
     private val viewModel: WedgeViewModel by viewModels {
         WedgeViewModelFactory((requireActivity().application as WedgesApplication).repository)
@@ -32,9 +35,14 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentWedgeListBinding.inflate(inflater)
+        _binding = FragmentWedgeListBinding.inflate(inflater)
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +52,6 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
 
     private fun init() {
         binding.apply {
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
             recyclerView.adapter = adapter
 
             viewModel.allWedges.observe(requireActivity()) { wedges ->
@@ -68,9 +75,9 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
 
     override fun setListeners(item: View, wedge: Wedge) {
         item.setOnClickListener {
-            val i = Intent(activity, WedgeEditActivity::class.java)
-            i.putExtra("wedge", wedge)
-            startActivity(i)
+            val action =
+                WedgeListFragmentDirections.actionWedgeListFragmentToWedgeEditActivity(wedge)
+            findNavController().navigate(action)
         }
 
         item.setOnLongClickListener {

@@ -6,20 +6,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import ru.svoyakmartin.splitter.*
 import ru.svoyakmartin.splitter.databinding.ActivityMainBinding
-import ru.svoyakmartin.splitter.screens.add.WedgeEditActivity
-import ru.svoyakmartin.splitter.screens.main.list.WedgeListFragment
-import ru.svoyakmartin.splitter.screens.main.statistic.StatisticFragment
+import ru.svoyakmartin.splitter.model.Wedge
+import ru.svoyakmartin.splitter.screens.main.list.WedgeListFragmentDirections
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var backPressed: Long = 0
-    private val listFragment = WedgeListFragment.getInstance()
-    private val statisticFragment = StatisticFragment.getInstance()
-    private var currentFragmentTag: String? = null
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,22 +28,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        setContent(listFragment)
+//        Util.startWorker(applicationContext)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
         binding.apply {
             floatingActionButtonAdd.setOnClickListener {
-                startActivity(Intent(this@MainActivity, WedgeEditActivity::class.java))
+//                startActivity(Intent(this@MainActivity, WedgeEditActivity::class.java))
+                val action =
+                    WedgeListFragmentDirections.actionWedgeListFragmentToWedgeEditActivity(Wedge())
+                findNavController(R.id.nav_host_fragment).navigate(action)
             }
 
             bottomNavigationView.setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.bottom_menu_item_wedge_list -> {
                         floatingActionButtonAdd.visibility = View.VISIBLE
-                        setContent(listFragment)
+                        findNavController(R.id.nav_host_fragment).navigate(R.id.wedgeListFragment)
                     }
                     R.id.bottom_menu_item_wedge_statistic -> {
                         floatingActionButtonAdd.visibility = View.GONE
-                        setContent(statisticFragment)
+                        findNavController(R.id.nav_host_fragment).navigate(R.id.statisticFragment)
                     }
                 }
                 true
@@ -68,30 +73,5 @@ class MainActivity : AppCompatActivity() {
         }
 
         onBackPressedDispatcher.addCallback(this, callback)
-    }
-
-    private fun setContent(fragment: Fragment) {
-        val destFragmentTag = fragment::class.java.name
-
-        if (currentFragmentTag == destFragmentTag) return
-
-        val transaction = supportFragmentManager.beginTransaction()
-        val currentFragment = supportFragmentManager.findFragmentByTag(currentFragmentTag)
-        var destFragment = supportFragmentManager.findFragmentByTag(destFragmentTag)
-
-        if (destFragment == null){
-            transaction.add(R.id.place_holder, fragment, destFragmentTag)
-            destFragment = fragment
-        }
-
-        transaction.apply {
-                if (currentFragment != null){
-                    hide(currentFragment)
-                }
-                show(destFragment)
-                commit()
-            }
-
-        currentFragmentTag = destFragmentTag
     }
 }

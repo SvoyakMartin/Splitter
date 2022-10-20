@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.svoyakmartin.splitter.R
 import ru.svoyakmartin.splitter.model.Wedge
 import ru.svoyakmartin.splitter.databinding.WedgeItemBinding
-import ru.svoyakmartin.splitter.util.util
+import ru.svoyakmartin.splitter.util.Util
 
 class WedgeAdapter(private val listener: Listener):RecyclerView.Adapter<WedgeAdapter.WedgeHolder>() {
     private var wedgesList = ArrayList<Wedge>()
@@ -19,8 +19,8 @@ class WedgeAdapter(private val listener: Listener):RecyclerView.Adapter<WedgeAda
         fun bind(wedge: Wedge, listener: Listener){
             binding.apply {
                 with(wedge){
-                    itemDate.text = util.getFormattedDate(date)
-                    itemSum.text = util.num2String(sum)
+                    itemDate.text = Util.getFormattedDate(date)
+                    itemSum.text = Util.num2String(sum)
                 }
                 listener.setListeners(item, wedge)
             }
