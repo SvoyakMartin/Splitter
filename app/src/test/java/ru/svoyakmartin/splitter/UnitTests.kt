@@ -5,7 +5,7 @@ import org.junit.Test
 import org.junit.Assert.*
 import ru.svoyakmartin.splitter.util.Util
 
-class ExampleUnitTest {
+class UnitTests {
     @Test
     fun testNum2String() {
         assertTrue("test num2String",

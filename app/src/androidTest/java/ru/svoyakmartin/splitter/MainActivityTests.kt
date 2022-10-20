@@ -11,14 +11,14 @@ import org.junit.runner.RunWith
 import ru.svoyakmartin.splitter.screens.main.MainActivity
 
 @RunWith(AndroidJUnit4::class)
-class MainActivityInstrumentedTests {
+class MainActivityTests {
     @get:Rule
     val activity = ActivityScenarioRule(MainActivity::class.java)
 
     fun testScroll() {
         onView(withId(R.id.recycler_view)).perform(
             RecyclerViewActions
-                .scrollToPosition<RecyclerView.ViewHolder>(7)
+                .scrollToPosition<RecyclerView.ViewHolder>(0)
         )
     }
 }

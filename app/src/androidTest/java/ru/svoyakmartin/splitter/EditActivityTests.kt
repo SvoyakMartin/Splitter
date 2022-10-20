@@ -17,7 +17,7 @@ import org.junit.Rule
 import ru.svoyakmartin.splitter.screens.add.WedgeEditActivity
 
 @RunWith(AndroidJUnit4::class)
-class EditActivityInstrumentedTests {
+class EditActivityTests {
     @get:Rule
     val activity = ActivityScenarioRule(WedgeEditActivity::class.java)
 
