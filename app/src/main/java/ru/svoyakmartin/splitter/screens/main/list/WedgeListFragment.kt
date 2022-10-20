@@ -13,14 +13,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import ru.svoyakmartin.splitter.*
 import ru.svoyakmartin.splitter.databinding.FragmentWedgeListBinding
 import ru.svoyakmartin.splitter.model.Total
 import ru.svoyakmartin.splitter.model.Wedge
-import ru.svoyakmartin.splitter.screens.add.WedgeEditActivity
 import ru.svoyakmartin.splitter.util.Util
 
 class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
@@ -66,11 +63,6 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
                 }
             }
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun getInstance() = WedgeListFragment()
     }
 
     override fun setListeners(item: View, wedge: Wedge) {

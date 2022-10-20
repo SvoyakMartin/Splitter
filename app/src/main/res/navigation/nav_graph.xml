@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/wedgeListFragment">
 
+    <fragment
+        android:id="@+id/wedgeListFragment"
+        android:name="ru.svoyakmartin.splitter.screens.main.list.WedgeListFragment"
+        android:label="fragment_wedge_list"
+        tools:layout="@layout/fragment_wedge_list" >
+        <action
+            android:id="@+id/action_wedgeListFragment_to_statisticFragment"
+            app:destination="@id/statisticFragment" />
+        <action
+            android:id="@+id/action_wedgeListFragment_to_wedgeEditActivity"
+            app:destination="@id/wedgeEditActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticFragment"
+        android:name="ru.svoyakmartin.splitter.screens.main.statistic.StatisticFragment"
+        android:label="StatisticFragment" >
+        <action
+            android:id="@+id/action_statisticFragment_to_wedgeListFragment"
+            app:destination="@id/wedgeListFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/wedgeEditActivity"
+        android:name="ru.svoyakmartin.splitter.screens.add.WedgeEditActivity"
+        android:label="WedgeEditActivity" >
+        <argument
+            android:name="wedge"
+            app:argType="ru.svoyakmartin.splitter.model.Wedge" />
+    </activity>
 </navigation>
