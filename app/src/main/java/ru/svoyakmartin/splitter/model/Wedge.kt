@@ -3,7 +3,10 @@ package ru.svoyakmartin.splitter.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import ru.svoyakmartin.splitter.util.Util
 import java.io.Serializable
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Entity(tableName = "wedges_table")
 data class Wedge(
@@ -27,4 +30,12 @@ data class Wedge(
     @ColumnInfo(name = "sum")
     var sum: Double = 0.0
 
-): Serializable
+): Serializable{
+    companion object{
+        val DATE_FORMAT = SimpleDateFormat("dd.MM.yyyy", Locale("ru"))
+    }
+
+    fun getFormattedDate(): String {
+        return DATE_FORMAT.format(this.date)
+    }
+}

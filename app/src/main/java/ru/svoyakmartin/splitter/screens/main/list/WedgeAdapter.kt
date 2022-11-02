@@ -4,50 +4,51 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.svoyakmartin.splitter.R
 import ru.svoyakmartin.splitter.model.Wedge
 import ru.svoyakmartin.splitter.databinding.WedgeItemBinding
-import ru.svoyakmartin.splitter.util.Util
 
-class WedgeAdapter(private val listener: Listener):RecyclerView.Adapter<WedgeAdapter.WedgeHolder>() {
+class WedgeAdapter(private val listener: Listener) :
+    RecyclerView.Adapter<WedgeAdapter.WedgeHolder>() {
     private var wedgesList = ArrayList<Wedge>()
 
-    class WedgeHolder(item: View): RecyclerView.ViewHolder(item) {
-        private val binding = WedgeItemBinding.bind(item)
+    class WedgeHolder(private val binding: WedgeItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(wedge: Wedge, listener: Listener){
+        fun bind(wedge: Wedge, listener: Listener) {
             binding.apply {
-                with(wedge){
-                    itemDate.text = Util.getFormattedDate(date)
-                    itemSum.text = Util.num2String(sum)
-                }
-                listener.setListeners(item, wedge)
+                this.wedge = wedge
+                this.listener = listener
+                executePendingBindings()
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WedgeHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.wedge_item, parent, false)
+        val binding: WedgeItemBinding =
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context), R.layout.wedge_item, parent, false
+            )
 
-        return WedgeHolder(view)
+        return WedgeHolder(binding)
     }
 
     override fun onBindViewHolder(holder: WedgeHolder, position: Int) {
         holder.bind(wedgesList[position], listener)
     }
 
-    override fun getItemCount(): Int {
-        return wedgesList.size
-    }
+    override fun getItemCount(): Int = wedgesList.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(wedges: List<Wedge>){
+    fun setList(wedges: List<Wedge>) {
         wedgesList = wedges as ArrayList<Wedge>
         notifyDataSetChanged()
     }
 
-    interface Listener{
-        fun setListeners(item: View, wedge: Wedge)
+    interface Listener {
+        fun onLongClick(view: View, wedge: Wedge): Boolean
+        fun onClick(view: View, wedge: Wedge)
     }
 }

@@ -11,7 +11,7 @@
     <string name="bottom_menu_item_wedge_list">Список</string>
     <string name="bottom_menu_item_wedge_statistic">Статистика</string>
 <!--    Add activity    -->
-    <string name="sum_title">Клин: %1$s</string>
+    <string name="sum_title">Клин: %1$.2f</string>
     <string name="date_title">Дата</string>
     <string name="add_title">Доход</string>
     <string name="out_title">Расход</string>
@@ -28,13 +28,15 @@
     <string name="fragment_statistic_amount_of_days_title">Всего дней:</string>
 <!--    Telegram intent text  -->
     <string name="share_intent_date">ОТЧЁТ за %1$s:\n</string>
-    <string name="share_intent_wedge">Сумма от правила клина: %1$s\n</string>
-    <string name="share_intent_add_extra">Заработано дополнительно: %1$s\n</string>
-    <string name="share_intent_invest">Инвестировано: %1$s\n</string>
-    <string name="share_intent_sum">Итого на инвестиции: %1$s</string>
+    <string name="share_intent_wedge">Сумма от правила клина: %1$.2f\n</string>
+    <string name="share_intent_add_extra">Заработано дополнительно: %1$.2f\n</string>
+    <string name="share_intent_invest">Инвестировано: %1$.2f\n</string>
+    <string name="share_intent_sum">Итого на инвестиции: %1$.2f</string>
 <!--    Confirm delete dialog  -->
     <string name="confirm_delete_dialog_yes">Да</string>
     <string name="confirm_delete_dialog_no">Нет</string>
     <string name="confirm_delete_dialog_title">Подтвердите удаление</string>
-    <string name="confirm_delete_dialog_message">Уверены, что хотите удалить запись за</string>
+    <string name="confirm_delete_dialog_message">Уверены, что хотите удалить запись за %1$s</string>
+    <!--    Item  -->
+    <string name="formatted_num">%1$.2f</string>
 </resources>

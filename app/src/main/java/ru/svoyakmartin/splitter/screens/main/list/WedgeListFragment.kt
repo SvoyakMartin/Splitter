@@ -1,6 +1,5 @@
 package ru.svoyakmartin.splitter.screens.main.list
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -9,20 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import ru.svoyakmartin.splitter.*
 import ru.svoyakmartin.splitter.databinding.FragmentWedgeListBinding
 import ru.svoyakmartin.splitter.model.Total
 import ru.svoyakmartin.splitter.model.Wedge
-import ru.svoyakmartin.splitter.util.Util
 
 class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
-    private var _binding: FragmentWedgeListBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentWedgeListBinding
     private val adapter = WedgeAdapter(this)
     private val viewModel: WedgeViewModel by viewModels {
         WedgeViewModelFactory((requireActivity().application as WedgesApplication).repository)
@@ -32,14 +31,9 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentWedgeListBinding.inflate(inflater)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_wedge_list, container, false)
 
         return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,39 +42,28 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
     }
 
     private fun init() {
+        viewModel.allWedges.observe(requireActivity()) { adapter.setList(it) }
         binding.apply {
             recyclerView.adapter = adapter
-
-            viewModel.allWedges.observe(requireActivity()) { wedges ->
-                adapter.setList(wedges)
-
-                if (wedges.isNotEmpty()) {
-                    recyclerView.visibility = View.VISIBLE
-                    wedgeListPlaceHolder.visibility = View.GONE
-                } else {
-                    recyclerView.visibility = View.GONE
-                    wedgeListPlaceHolder.visibility = View.VISIBLE
-                }
-            }
+            lifecycleOwner = viewLifecycleOwner
+            listViewModel = viewModel
         }
     }
 
-    override fun setListeners(item: View, wedge: Wedge) {
-        item.setOnClickListener {
-            val action =
-                WedgeListFragmentDirections.actionWedgeListFragmentToWedgeEditActivity(wedge)
-            findNavController().navigate(action)
-        }
+    override fun onLongClick(view: View, wedge: Wedge): Boolean {
+        showContextPopupMenu(view, wedge)
 
-        item.setOnLongClickListener {
-            showContextPopupMenu(item, wedge)
+        return true
+    }
 
-            return@setOnLongClickListener true
-        }
+    override fun onClick(view: View, wedge: Wedge) {
+        findNavController().navigate(
+            WedgeListFragmentDirections.actionWedgeListFragmentToWedgeEditActivity(wedge)
+        )
     }
 
     private fun showContextPopupMenu(item: View, wedge: Wedge) {
-        PopupMenu(activity, item).apply {
+        PopupMenu(requireContext(), item).apply {
             inflate(R.menu.item_context_menu)
             setOnMenuItemClickListener {
                 when (it.itemId) {
@@ -101,22 +84,29 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
     }
 
     private fun confirmDeleteWedge(wedge: Wedge) {
-        AlertDialog.Builder(requireContext()).apply {
+        MaterialAlertDialogBuilder(requireContext()).apply {
+            setIcon(R.drawable.ic_item_context_menu_delete_24)
+            setTitle(getString(R.string.confirm_delete_dialog_title))
+            setMessage(
+                "${
+                    getString(
+                        R.string.confirm_delete_dialog_message,
+                        wedge.getFormattedDate()
+                    )
+                }?"
+            )
             setPositiveButton(getString(R.string.confirm_delete_dialog_yes)) { _, _ ->
                 deleteWedgeOnDB(wedge)
             }
             setNegativeButton(getString(R.string.confirm_delete_dialog_no)) { _, _ -> }
-            setTitle(getString(R.string.confirm_delete_dialog_title))
-            setMessage("${getString(R.string.confirm_delete_dialog_message)} ${Util.getFormattedDate(wedge.date)}?")
-            create()
             show()
         }
     }
 
     private fun deleteWedgeOnDB(wedge: Wedge) {
         viewModel.apply {
-                deleteWedge(wedge)
-                deleteTotal(Total(wedge.date))
+            deleteWedge(wedge)
+            deleteTotal(Total(wedge.date))
         }
     }
 
@@ -124,11 +114,15 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
         with(wedge) {
             viewModel.getSumWedgesOnDate(date).observeOnce(requireActivity()) { sumWedgesOnDate ->
                 val text =
-                    getString(R.string.share_intent_date, Util.getFormattedDate(date)) +
-                            getString(R.string.share_intent_wedge, Util.num2String(sum - addExtra)) +
-                            getString(R.string.share_intent_add_extra, Util.num2String(addExtra)) +
-                            if (invest > 0) {getString(R.string.share_intent_invest, Util.num2String(invest))} else {""} +
-                            getString(R.string.share_intent_sum, Util.num2String(sumWedgesOnDate))
+                    getString(R.string.share_intent_date, getFormattedDate()) +
+                            getString(R.string.share_intent_wedge, sum - addExtra) +
+                            getString(R.string.share_intent_add_extra, addExtra) +
+                            if (invest > 0) {
+                                getString(R.string.share_intent_invest, invest)
+                            } else {
+                                ""
+                            } +
+                            getString(R.string.share_intent_sum, sumWedgesOnDate)
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     type = "text/plain"
@@ -151,4 +145,6 @@ class WedgeListFragment : Fragment(), WedgeAdapter.Listener {
             }
         })
     }
+
+
 }

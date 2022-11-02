@@ -8,6 +8,10 @@ import ru.svoyakmartin.splitter.model.Total
 
 class WedgeViewModel(private val repository: WedgeRepository) : ViewModel() {
     val allWedges: LiveData<List<Wedge>> = repository.allWedge.asLiveData()
+    val noData: LiveData<Boolean> = Transformations.map(allWedges){
+        it.isEmpty()
+    }
+
 
     fun deleteWedge(wedge: Wedge) = viewModelScope.launch {
         repository.deleteWedge(wedge)
@@ -18,7 +22,7 @@ class WedgeViewModel(private val repository: WedgeRepository) : ViewModel() {
     }
 
     fun getSumWedgesOnDate(date: Long): LiveData<Double> {
-        return  repository.getSumWedgesOnDate(date).asLiveData()
+        return repository.getSumWedgesOnDate(date).asLiveData()
     }
 }
 

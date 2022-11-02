@@ -22,10 +22,10 @@ interface WedgeDao {
     @Query("SELECT * FROM wedges_table ORDER BY date DESC")
     fun getAllWedges(): Flow<List<Wedge>>
 
-    @Query("SELECT SUM(invest) FROM totals_table")
+    @Query("SELECT COALESCE(SUM(invest), 0.0) FROM totals_table")
     fun getSumInvests(): Flow<Double>
 
-    @Query("SELECT SUM(wedge) FROM totals_table")
+    @Query("SELECT COALESCE(SUM(wedge), 0.0) FROM totals_table")
     fun getSumWedges(): Flow<Double>
 
     @Query("SELECT COUNT(DISTINCT date) FROM totals_table")

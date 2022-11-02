@@ -8,4 +8,8 @@
     <color name="brown_dark">#4b2c20</color>
     <color name="black">#000</color>
     <color name="white">#fff</color>
+    <color name="green">#0C0</color>
+    <color name="yellow">#FC0</color>
+    <color name="red">#C10</color>
+    <color name="blue">#00F</color>
 </resources>
